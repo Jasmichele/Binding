@@ -97,11 +97,11 @@ namespace BindingLab
                 
                 foreach(XmlNode child in supNode.ChildNodes)
                 {
-                    string empId;
-                    string name;
-                    string addr;
-                    string city;
-                    string state;
+                    string empId = "";
+                    string name = "";
+                    string addr = "";
+                    string city = "";
+                    string state = "";
                     
                     foreach(XmlNode granchild in child.ChildNodes)
                     {
@@ -133,13 +133,27 @@ namespace BindingLab
                                     break;
                                 }
                         }
-                          
-                            
-
-
+                        Emp e1 = new Emp(empId, name, addr, city, state);
+                        employee.Add(e1);
                     }
                 }
             }
+        }
+        public void FileNotFound()
+        {
+            using (XmlWriter writer = XmlWriter.Create("C:\\myfiles\\star.xml"))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("SuperCompany");
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            ReadFile();
         }
     }
 }

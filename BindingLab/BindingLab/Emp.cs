@@ -14,6 +14,18 @@ namespace BindingLab
         string City;
         string State;
 
+        public Emp()
+        {
+
+        }
+        public Emp(string id, string name, string add, string city, string state)
+        {
+            EmpId = id;
+            EmpName = name;
+            Addr = add;
+            City = city;
+            State = state;
+        }
         public string EmpId1
         {
             get
