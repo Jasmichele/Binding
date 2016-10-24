@@ -27,7 +27,8 @@ namespace BindingLab
         public MainWindow()
         {
             InitializeComponent();
-         
+            ReadFile();
+            listView.ItemsSource = employee;
         }
 
         private void textBoxId_TextChanged(object sender, TextChangedEventArgs e)
@@ -97,48 +98,44 @@ namespace BindingLab
                 
                 foreach(XmlNode child in supNode.ChildNodes)
                 {
-                    string empId = "";
-                    string name = "";
-                    string addr = "";
-                    string city = "";
-                    string state = "";
-                    
-                    foreach(XmlNode granchild in child.ChildNodes)
+                    Emp e1 = new Emp();
+
+                    foreach (XmlNode granchild in child.ChildNodes)
                     {
-                        switch(granchild.Name)
+                        switch (granchild.Name)
                         {
                             case "EmployeeId":
                                 {
-                                    empId = granchild.InnerText;
+                                    e1.EmpId1 = granchild.InnerText;
                                     break;
                                 }
                             case "EmployeeName":
                                 {
-                                    name = granchild.InnerText;
+                                    e1.EmpName1 = granchild.InnerText;
                                     break;
                                 }
                             case "Address":
                                 {
-                                    addr = granchild.InnerText;
+                                    e1.Addr1 = granchild.InnerText;
                                     break;
                                 }
                             case "City":
                                 {
-                                    city = granchild.InnerText;
+                                    e1.City1 = granchild.InnerText;
                                     break;
                                 }
                             case "State":
                                 {
-                                    state = granchild.InnerText;
+                                    e1.State1 = granchild.InnerText;
                                     break;
                                 }
                         }
-                        Emp e1 = new Emp(empId, name, addr, city, state);
-                        employee.Add(e1);
                     }
+                    employee.Add(e1);
                 }
             }
         }
+
         public void FileNotFound()
         {
             using (XmlWriter writer = XmlWriter.Create("C:\\myfiles\\star.xml"))
@@ -151,9 +148,5 @@ namespace BindingLab
             }
         }
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            ReadFile();
-        }
     }
 }
